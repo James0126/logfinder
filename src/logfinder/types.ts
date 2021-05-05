@@ -3,7 +3,7 @@ import { LogFinderRule, LogFragment } from "./create-log-finder";
 
 export interface TransformResult {
   msgType: string;
-  canonicalMsg: string;
+  canonicalMsg: string[];
   payload: Event;
 }
 
