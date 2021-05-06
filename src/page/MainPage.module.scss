@@ -1,6 +1,7 @@
 .wrapper {
   padding: 50px;
   display: flex;
+  justify-content: center;
 }
 
 .result {
@@ -8,4 +9,5 @@
   height: 800px;
   overflow-y: scroll;
   margin-left: 200px;
+  padding-right: 40px;
 }
