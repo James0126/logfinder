@@ -334,10 +334,167 @@ export const repayStableRule = (anchorMarketAddress: string) => ({
   ],
 });
 
-export const claimRewardsRule = () => ({
+export const blunaSwapRule = () => ({
   type: "from_contract",
   attributes: [
     ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["holder_address"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["holder_address"],
+    ["amount"],
+    ["contract_address"],
+    ["action", "swap"],
+    ["offer_asset"],
+    ["ask_asset"],
+    ["offer_amount"],
+    ["return_amount"],
+    ["tax_amount"],
+    ["spread_amount"],
+    ["commission_amount"],
+  ],
+});
+
+export const lunaSwapRule = () => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action", "swap"],
+    ["offer_asset"],
+    ["ask_asset"],
+    ["offer_amount"],
+    ["return_amount"],
+    ["tax_amount"],
+    ["spread_amount"],
+    ["commission_amount"],
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["holder_address"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["holder_address"],
+    ["amount"],
+  ],
+});
+
+export const ancSwapRule = (pairAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", pairAddress],
+    ["action", "swap"],
+    ["offer_asset"],
+    ["ask_asset"],
+    ["offer_amount"],
+    ["return_amount"],
+    ["tax_amount"],
+    ["spread_amount"],
+    ["commission_amount"],
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});
+
+export const ustSwapRule = (pairAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address", pairAddress],
+    ["action", "swap"],
+    ["offer_asset"],
+    ["ask_asset"],
+    ["offer_amount"],
+    ["return_amount"],
+    ["tax_amount"],
+    ["spread_amount"],
+    ["commission_amount"],
+  ],
+});
+
+export const stakeLPRule = (lpStakingAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address", lpStakingAddress],
+    ["action", "bond"],
+    ["owner"],
+    ["amount"],
+  ],
+});
+
+export const unstakeLPRule = (lpStakingAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", lpStakingAddress],
+    ["action", "unbond"],
+    ["owner"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});
+
+export const airdropRule = () => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action", "claim"],
+    ["stage"],
+    ["address"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});
+
+export const lpStakingRewardRule = (lpStakingAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", lpStakingAddress],
+    ["action", "withdraw"],
+    ["owner"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});
+
+export const borrowRewardsRule = (marketAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", marketAddress],
     ["action", "claim_rewards"],
     ["claim_amount"],
     ["contract_address"],
@@ -349,5 +506,64 @@ export const claimRewardsRule = () => ({
     ["from"],
     ["to"],
     ["amount"],
+  ],
+});
+
+export const govStakeRule = (govAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address", govAddress],
+    ["action", "staking"],
+    ["sender"],
+    ["share"],
+    ["amount"],
+  ],
+});
+
+export const govUnstakeRule = (govAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", govAddress],
+    ["action", "withdraw"],
+    ["recipient"],
+    ["amount"],
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});
+
+export const createPollRule = (govAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address", govAddress],
+    ["action", "create_poll"],
+    ["creator"],
+    ["poll_id"],
+    ["end_height"],
+  ],
+});
+
+export const castVoteRule = (govAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", govAddress],
+    ["action", "cast_vote"],
+    ["poll_id"],
+    ["amount"],
+    ["voter"],
+    ["vote_option"],
   ],
 });

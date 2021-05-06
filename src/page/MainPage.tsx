@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { TransformResult } from "./logfinder/types";
-import { getTxInfo } from "./logfinder/format";
+import { TransformResult } from "../logfinder/types";
+import { getTxInfo } from "../logfinder/format";
+import s from "./MainPage.module.scss";
 
 const MainPage = () => {
   const [hash, setHash] = useState<string>("");
@@ -8,12 +9,11 @@ const MainPage = () => {
 
   const onClick = async (hash: string) => {
     const info = await getTxInfo(hash);
-    //B1030469F398F8B137E86FF19A89638843727F87A9E73CD6D8E223BDE9BFF8A4
     setResult(info);
   };
 
   return (
-    <section>
+    <section className={s.wrapper}>
       <article>
         <div>
           Tx Hash:
@@ -33,7 +33,7 @@ const MainPage = () => {
           </button>
         </div>
       </article>
-      <article>
+      <article className={s.result}>
         <pre>{result?.map((data) => JSON.stringify(data, undefined, 2))}</pre>
       </article>
     </section>
