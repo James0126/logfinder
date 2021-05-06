@@ -34,15 +34,17 @@ import {
 const anchorbLunaAddress = "terra1u0t35drzyy0mujj8rkdyzhe264uls4ug3wdp3x";
 const anchorbLunaHubAddress = "terra1fflas6wv4snv8lsda9knvq2w0cyt493r8puh2e";
 const anchorbLunaRwardAddress = "terra1ac24j6pdxh53czqyrkr6ygphdeftg7u3958tl2";
-const anchorPairAddress = "terra1wfvczps2865j0awnurk9m04u7wdmd6qv3fdnvz";
+const anchorANCPairAddress = "terra1wfvczps2865j0awnurk9m04u7wdmd6qv3fdnvz";
+const anchorbLunaPairAddress = "terra13e4jmcjnwrauvl2fnjdwex0exuzd8zrh5xk29v";
 const anchorMarketAddress = "terra15dwd5mj8v59wpj0wvt233mf5efdff808c5tkal";
 const anchorbLunaCustodyAddress =
   "terra1ltnkx0mv7lf2rca9f8w740ashu93ujughy4s7p";
 const anchorLPStakingAddress = "terra19nxz35c8f7t3ghdxrxherym20tux8eccar0c3k";
 const anchorGovAddress = "terra16ckeuu7c6ggu52a8se005mg5c0kd2kmuun63cu";
+const anchorAirdropAddress = "terra1u5ywhlve3wugzqslqvm8ks2j0nsvrqjx0mgxpk";
 
 const anchorProvideLiquidityRuleSet: LogFindersRuleSet = {
-  rule: provideLiquidityRule(anchorPairAddress),
+  rule: provideLiquidityRule(anchorANCPairAddress),
   transform: (fragment) => ({
     msgType: "anchor/provide-liquidity",
     canonicalMsg: [
@@ -54,7 +56,7 @@ const anchorProvideLiquidityRuleSet: LogFindersRuleSet = {
 };
 
 const anchorWithdrawLiquidityRuleSet: LogFindersRuleSet = {
-  rule: withdrawLiquidityRule(anchorPairAddress),
+  rule: withdrawLiquidityRule(anchorANCPairAddress),
   transform: (fragment) => ({
     msgType: "anchor/withdraw-liquidity",
     canonicalMsg: [
@@ -202,7 +204,7 @@ const anchorRepayStableRuleSet: LogFindersRuleSet = {
 };
 
 const anchorbLunaSwapRuleSet: LogFindersRuleSet = {
-  rule: blunaSwapRule(),
+  rule: blunaSwapRule(anchorbLunaPairAddress),
   transform: (fragment) => ({
     msgType: "anchor/bLuna-swap",
     canonicalMsg: [
@@ -213,7 +215,7 @@ const anchorbLunaSwapRuleSet: LogFindersRuleSet = {
 };
 
 const anchorLunaSwapRuleSet: LogFindersRuleSet = {
-  rule: lunaSwapRule(),
+  rule: lunaSwapRule(anchorbLunaPairAddress),
   transform: (fragment) => ({
     msgType: "anchor/Luna-swap",
     canonicalMsg: [
@@ -224,7 +226,7 @@ const anchorLunaSwapRuleSet: LogFindersRuleSet = {
 };
 
 const anchorAncSwapRuleSet: LogFindersRuleSet = {
-  rule: ancSwapRule(anchorPairAddress),
+  rule: ancSwapRule(anchorANCPairAddress),
   transform: (fragment) => ({
     msgType: "anchor/ANC-swap",
     canonicalMsg: [
@@ -235,7 +237,7 @@ const anchorAncSwapRuleSet: LogFindersRuleSet = {
 };
 
 const anchorUstSwapRuleSet: LogFindersRuleSet = {
-  rule: ustSwapRule(anchorPairAddress),
+  rule: ustSwapRule(anchorANCPairAddress),
   transform: (fragment) => ({
     msgType: "anchor/UST-swap",
     canonicalMsg: [
@@ -268,7 +270,7 @@ const anchorUnstakeLPRuleSet: LogFindersRuleSet = {
 };
 
 const anchorAirdropRuleSet: LogFindersRuleSet = {
-  rule: airdropRule(),
+  rule: airdropRule(anchorAirdropAddress),
   transform: (fragment) => ({
     msgType: "anchor/airdrop",
     canonicalMsg: [

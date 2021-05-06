@@ -241,7 +241,7 @@ export const repayStableRule = (anchorMarketAddress: string) => ({
   ],
 });
 
-export const blunaSwapRule = () => ({
+export const blunaSwapRule = (pairAddress: string) => ({
   type: "from_contract",
   attributes: [
     ["contract_address"],
@@ -257,7 +257,7 @@ export const blunaSwapRule = () => ({
     ["action"],
     ["holder_address"],
     ["amount"],
-    ["contract_address"],
+    ["contract_address", pairAddress],
     ["action", "swap"],
     ["offer_asset"],
     ["ask_asset"],
@@ -269,10 +269,10 @@ export const blunaSwapRule = () => ({
   ],
 });
 
-export const lunaSwapRule = () => ({
+export const lunaSwapRule = (pairAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
+    ["contract_address", pairAddress],
     ["action", "swap"],
     ["offer_asset"],
     ["ask_asset"],
@@ -367,10 +367,10 @@ export const unstakeLPRule = (lpStakingAddress: string) => ({
   ],
 });
 
-export const airdropRule = () => ({
+export const airdropRule = (airdropAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
+    ["contract_address", airdropAddress],
     ["action", "claim"],
     ["stage"],
     ["address"],
