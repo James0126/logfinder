@@ -1,7 +1,7 @@
-export const mAssetSwapRule = (pairAddress: string) => ({
+export const mAssetSwapRule = () => ({
   type: "from_contract",
   attributes: [
-    ["contract_address", pairAddress],
+    ["contract_address"],
     ["action", "swap"],
     ["offer_asset"],
     ["ask_asset"],
@@ -74,10 +74,10 @@ export const burnRule = (mintAddress: string) => ({
   ],
 });
 
-export const provideLiquidityRule = (pairAddress: string) => ({
+export const provideLiquidityRule = () => ({
   type: "from_contract",
   attributes: [
-    ["contract_address", pairAddress],
+    ["contract_address"],
     ["action", "provide_liquidity"],
     ["assets"],
     ["share"],
@@ -94,7 +94,7 @@ export const provideLiquidityRule = (pairAddress: string) => ({
   ],
 });
 
-export const withdrawLiquidityRule = (pairAddress: string) => ({
+export const withdrawLiquidityRule = () => ({
   type: "from_contract",
   attributes: [
     ["contract_address"],
@@ -102,7 +102,7 @@ export const withdrawLiquidityRule = (pairAddress: string) => ({
     ["from"],
     ["to"],
     ["amount"],
-    ["contract_address", pairAddress],
+    ["contract_address"],
     ["action", "withdraw_liquidity"],
     ["withdrawn_share"],
     ["refund_assets"],
@@ -182,6 +182,7 @@ export const govUnstakeRule = (govAddress: string) => ({
   attributes: [
     ["contract_address", govAddress],
     ["action", "withdraw"],
+    ["recipient"],
     ["amount"],
     ["contract_address"],
     ["action"],

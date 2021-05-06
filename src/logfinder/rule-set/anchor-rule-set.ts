@@ -1,5 +1,4 @@
-import { LogFindersRuleSet } from "./types";
-import { createLogMatcher } from "./execute";
+import { LogFindersRuleSet } from "../types";
 import {
   bondLunaRule,
   borrowStableRule,
@@ -28,7 +27,7 @@ import {
   govUnstakeRule,
   createPollRule,
   castVoteRule,
-} from "../logPatterns/anchor-logs-rule";
+} from "../../logPatterns/anchor-logs-rule";
 
 //only tequila
 const anchorbLunaAddress = "terra1u0t35drzyy0mujj8rkdyzhe264uls4ug3wdp3x";
@@ -344,7 +343,7 @@ const anchorCastVoteRuleSet: LogFindersRuleSet = {
   }),
 };
 
-export const logMatcher = createLogMatcher([
+export const anchorRuleArray: LogFindersRuleSet[] = [
   anchorProvideLiquidityRuleSet,
   anchorWithdrawLiquidityRuleSet,
   anchorDepositStableRuleSet,
@@ -372,4 +371,4 @@ export const logMatcher = createLogMatcher([
   anchorGovUntakeRuleSet,
   anchorCreatePollRuleSet,
   anchorCastVoteRuleSet,
-]);
+];
