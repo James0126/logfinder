@@ -18,6 +18,26 @@ export const mAssetSwapRule = () => ({
   ],
 });
 
+export const ustSwapRule = () => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action"],
+    ["from"],
+    ["to"],
+    ["amount"],
+    ["contract_address"],
+    ["action", "swap"],
+    ["offer_asset"],
+    ["ask_asset"],
+    ["offer_amount"],
+    ["return_amount"],
+    ["tax_amount"],
+    ["spread_amount"],
+    ["commission_amount"],
+  ],
+});
+
 export const openPositionRule = (mintAddress: string) => ({
   type: "from_contract",
   attributes: [
