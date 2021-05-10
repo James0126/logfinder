@@ -33,7 +33,7 @@ import {
 
 export const anchorRuleSet = (network: string) => {
   const contract = (contracts as Dictionary<Dictionary<string>>)[network];
-
+  console.log(network);
   const anchorProvideLiquidityRuleSet: LogFindersRuleSet = {
     rule: provideLiquidityRule(contract["anchorANCPairAddress"]),
     transform: (fragment) => ({
