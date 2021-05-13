@@ -18,11 +18,14 @@ export const provideLiquidityRule = (pairAddress: string) => ({
   ],
 });
 
-export const withdrawLiquidityRule = (pairAddress: string) => ({
+export const withdrawLiquidityRule = (
+  pairAddress: string,
+  lpAddress: string
+) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", lpAddress],
+    ["action", "send"],
     ["from"],
     ["to"],
     ["amount"],
@@ -31,13 +34,13 @@ export const withdrawLiquidityRule = (pairAddress: string) => ({
     ["withdrawn_share"],
     ["refund_assets"],
     ["contract_address"],
-    ["action"],
-    ["from"],
+    ["action", "transfer"],
+    ["from", pairAddress],
     ["to"],
     ["amount"],
-    ["contract_address"],
-    ["action"],
-    ["from"],
+    ["contract_address", lpAddress],
+    ["action", "burn"],
+    ["from", pairAddress],
     ["amount"],
   ],
 });
@@ -57,21 +60,24 @@ export const depositStableRule = (marketAddress: string) => ({
   ],
 });
 
-export const redeemStableRule = (marketAddress: string) => ({
+export const redeemStableRule = (
+  marketAddress: string,
+  aUSTAddress: string
+) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", aUSTAddress],
+    ["action", "send"],
     ["from"],
-    ["to"],
+    ["to", marketAddress],
     ["amount"],
     ["contract_address", marketAddress],
     ["action", "redeem_stable"],
     ["burn_amount"],
     ["redeem_amount"],
-    ["contract_address"],
-    ["action"],
-    ["from"],
+    ["contract_address", aUSTAddress],
+    ["action", "burn"],
+    ["from", marketAddress],
     ["amount"],
   ],
 });
@@ -147,13 +153,16 @@ export const claimRewardRule = (rewardAddress: string) => ({
   ],
 });
 
-export const depositCollateralRule = (anchorbLunaCustodyAddress: string) => ({
+export const depositCollateralRule = (
+  bLunaCustodyAddress: string,
+  bLunaAddress: string
+) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", bLunaAddress],
+    ["action", "send"],
     ["from"],
-    ["to"],
+    ["to", bLunaCustodyAddress],
     ["amount"],
     ["contract_address"],
     ["action"],
@@ -163,45 +172,45 @@ export const depositCollateralRule = (anchorbLunaCustodyAddress: string) => ({
     ["action"],
     ["holder_address"],
     ["amount"],
-    ["contract_address", anchorbLunaCustodyAddress],
+    ["contract_address", bLunaCustodyAddress],
     ["action", "deposit_collateral"],
     ["borrower"],
     ["amount"],
   ],
 });
 
-export const lockCollateralRule = (anchorbLunaCustodyAddress: string) => ({
+export const lockCollateralRule = (bLunaCustodyAddress: string) => ({
   type: "from_contract",
   attributes: [
     ["contract_address"],
     ["action", "lock_collateral"],
     ["borrower"],
     ["collaterals"],
-    ["contract_address", anchorbLunaCustodyAddress],
+    ["contract_address", bLunaCustodyAddress],
     ["action"],
     ["borrower"],
     ["amount"],
   ],
 });
 
-export const unlockCollateralRule = (anchorbLunaCustodyAddress: string) => ({
+export const unlockCollateralRule = (bLunaCustodyAddress: string) => ({
   type: "from_contract",
   attributes: [
     ["contract_address"],
     ["action", "unlock_collateral"],
     ["borrower"],
     ["collaterals"],
-    ["contract_address", anchorbLunaCustodyAddress],
+    ["contract_address", bLunaCustodyAddress],
     ["action"],
     ["borrower"],
     ["amount"],
   ],
 });
 
-export const withdrawCollateralRule = (anchorbLunaCustodyAddress: string) => ({
+export const withdrawCollateralRule = (bLunaCustodyAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address", anchorbLunaCustodyAddress],
+    ["contract_address", bLunaCustodyAddress],
     ["action", "withdraw_collateral"],
     ["borrower"],
     ["amount"],
@@ -221,31 +230,31 @@ export const withdrawCollateralRule = (anchorbLunaCustodyAddress: string) => ({
   ],
 });
 
-export const borrowStableRule = (anchorMarketAddress: string) => ({
+export const borrowStableRule = (marketAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address", anchorMarketAddress],
+    ["contract_address", marketAddress],
     ["action", "borrow_stable"],
     ["borrower"],
     ["borrow_amount"],
   ],
 });
 
-export const repayStableRule = (anchorMarketAddress: string) => ({
+export const repayStableRule = (marketAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address", anchorMarketAddress],
+    ["contract_address", marketAddress],
     ["action", "repay_stable"],
     ["borrower"],
     ["repay_amount"],
   ],
 });
 
-export const blunaSwapRule = (pairAddress: string) => ({
+export const blunaSwapRule = (bLunaAddress: string, pairAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", bLunaAddress],
+    ["action", "send"],
     ["from"],
     ["to"],
     ["amount"],
@@ -259,7 +268,7 @@ export const blunaSwapRule = (pairAddress: string) => ({
     ["amount"],
     ["contract_address", pairAddress],
     ["action", "swap"],
-    ["offer_asset"],
+    ["offer_asset", bLunaAddress],
     ["ask_asset"],
     ["offer_amount"],
     ["return_amount"],
@@ -317,19 +326,19 @@ export const ancSwapRule = (pairAddress: string) => ({
   ],
 });
 
-export const ustSwapRule = (pairAddress: string) => ({
+export const ustSwapRule = (ancAddress: string, pairAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", ancAddress],
+    ["action", "send"],
     ["from"],
-    ["to"],
+    ["to", pairAddress],
     ["amount"],
     ["contract_address", pairAddress],
     ["action", "swap"],
     ["offer_asset"],
     ["ask_asset"],
-    ["offer_amount"],
+    ["offer_amount", ancAddress],
     ["return_amount"],
     ["tax_amount"],
     ["spread_amount"],
@@ -337,13 +346,16 @@ export const ustSwapRule = (pairAddress: string) => ({
   ],
 });
 
-export const stakeLPRule = (lpStakingAddress: string) => ({
+export const stakeLPRule = (
+  lpTokenAddress: string,
+  lpStakingAddress: string
+) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", lpTokenAddress],
+    ["action", "send"],
     ["from"],
-    ["to"],
+    ["to", lpStakingAddress],
     ["amount"],
     ["contract_address", lpStakingAddress],
     ["action", "bond"],
@@ -416,13 +428,13 @@ export const borrowRewardsRule = (marketAddress: string) => ({
   ],
 });
 
-export const govStakeRule = (govAddress: string) => ({
+export const govStakeRule = (ancAddress: string, govAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", ancAddress],
+    ["action", "send"],
     ["from"],
-    ["to"],
+    ["to", govAddress],
     ["amount"],
     ["contract_address", govAddress],
     ["action", "staking"],
@@ -447,13 +459,13 @@ export const govUnstakeRule = (govAddress: string) => ({
   ],
 });
 
-export const createPollRule = (govAddress: string) => ({
+export const createPollRule = (ancAddress: string, govAddress: string) => ({
   type: "from_contract",
   attributes: [
-    ["contract_address"],
-    ["action"],
+    ["contract_address", ancAddress],
+    ["action", "send"],
     ["from"],
-    ["to"],
+    ["to", govAddress],
     ["amount"],
     ["contract_address", govAddress],
     ["action", "create_poll"],

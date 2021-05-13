@@ -33,7 +33,7 @@ import {
 
 export const anchorRuleSet = (network: string) => {
   const contract = (contracts as Dictionary<Dictionary<string>>)[network];
-  console.log(network);
+
   const anchorProvideLiquidityRuleSet: LogFindersRuleSet = {
     rule: provideLiquidityRule(contract["anchorANCPairAddress"]),
     transform: (fragment) => ({
@@ -47,7 +47,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorWithdrawLiquidityRuleSet: LogFindersRuleSet = {
-    rule: withdrawLiquidityRule(contract["anchorANCPairAddress"]),
+    rule: withdrawLiquidityRule(
+      contract["anchorANCPairAddress"],
+      contract["anchorAncUstLPAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/withdraw-liquidity",
       canonicalMsg: [
@@ -71,7 +74,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorRedeemStableRuleSet: LogFindersRuleSet = {
-    rule: redeemStableRule(contract["anchorMarketAddress"]),
+    rule: redeemStableRule(
+      contract["anchorMarketAddress"],
+      contract["anchoraUSTAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/redeem-stable",
       canonicalMsg: [
@@ -129,7 +135,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorDepositCollateralRuleSet: LogFindersRuleSet = {
-    rule: depositCollateralRule(contract["anchorbLunaCustodyAddress"]),
+    rule: depositCollateralRule(
+      contract["anchorbLunaCustodyAddress"],
+      contract["anchorbLunaAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/deposit-collateral",
       canonicalMsg: [
@@ -195,7 +204,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorbLunaSwapRuleSet: LogFindersRuleSet = {
-    rule: blunaSwapRule(contract["anchorbLunaPairAddress"]),
+    rule: blunaSwapRule(
+      contract["anchorbLunaAddress"],
+      contract["anchorbLunaPairAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/bLuna-swap",
       canonicalMsg: [
@@ -228,7 +240,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorUstSwapRuleSet: LogFindersRuleSet = {
-    rule: ustSwapRule(contract["anchorANCPairAddress"]),
+    rule: ustSwapRule(
+      contract["anchorANCAddress"],
+      contract["anchorANCPairAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/UST-swap",
       canonicalMsg: [
@@ -239,7 +254,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorStakeLPRuleSet: LogFindersRuleSet = {
-    rule: stakeLPRule(contract["anchorLPStakingAddress"]),
+    rule: stakeLPRule(
+      contract["anchorAncUstLPAddress"],
+      contract["anchorLPStakingAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/stake-lp",
       canonicalMsg: [
@@ -294,7 +312,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorGovStakeRuleSet: LogFindersRuleSet = {
-    rule: govStakeRule(contract["anchorGovAddress"]),
+    rule: govStakeRule(
+      contract["anchorANCAddress"],
+      contract["anchorGovAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/gov-stake",
       canonicalMsg: [
@@ -316,7 +337,10 @@ export const anchorRuleSet = (network: string) => {
   };
 
   const anchorCreatePollRuleSet: LogFindersRuleSet = {
-    rule: createPollRule(contract["anchorGovAddress"]),
+    rule: createPollRule(
+      contract["anchorANCAddress"],
+      contract["anchorGovAddress"]
+    ),
     transform: (fragment) => ({
       msgType: "anchor/create-poll",
       canonicalMsg: [`Create poll with ID ${fragment.attributes[8].value}`],
