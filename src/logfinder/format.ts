@@ -7,9 +7,9 @@ import { terraRuleSet } from "./rule-set/terra-rule-set";
 
 const rules = (network: Network) =>
   [
+    terraRuleSet(),
     anchorRuleSet(network.chainID),
     mirrorRuleSet(network.chainID),
-    terraRuleSet(network.chainID),
   ].flat();
 
 export const parseHash = async (data: string, network: Network) => {

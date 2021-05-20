@@ -332,3 +332,14 @@ export const sellExecuteOrderRule = (limitOrderAddress: string) => ({
     ["amount"],
   ],
 });
+
+export const transferRule = (tokenAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", tokenAddress],
+    ["action", "transfer"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});

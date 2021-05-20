@@ -23,6 +23,7 @@ import {
   buyExecuteOrderRule,
   sellExecuteOrderRule,
   ustSwapRule,
+  transferRule,
 } from "../../logPatterns/mirror-logs-rule";
 
 export const mirrorRuleSet = (network: string) => {
@@ -258,6 +259,17 @@ export const mirrorRuleSet = (network: string) => {
     }),
   };
 
+  const mirrorTransferRuleSet: LogFindersRuleSet = {
+    rule: transferRule(contract["mirrorMIRAddress"]),
+    transform: (fragment) => ({
+      msgType: "mirror/transfer",
+      canonicalMsg: [
+        `Transfer ${fragment.attributes[4].value}${fragment.attributes[0].value} to ${fragment.attributes[2].value}`,
+      ],
+      payload: fragment,
+    }),
+  };
+
   const mirrorRuleArray: LogFindersRuleSet[] = [
     mirrormAssetSwapRuleSet,
     mirrorUstSwapRuleSet,
@@ -280,6 +292,7 @@ export const mirrorRuleSet = (network: string) => {
     mirrorCancelOrderRuleSet,
     mirrorBuyExecuteOrderRuleSet,
     mirrorSellExecuteOrderRuleSet,
+    mirrorTransferRuleSet,
   ];
 
   return mirrorRuleArray;

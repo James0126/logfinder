@@ -29,6 +29,7 @@ import {
   govUnstakeRule,
   createPollRule,
   castVoteRule,
+  transferRule,
 } from "../../logPatterns/anchor-logs-rule";
 
 export const anchorRuleSet = (network: string) => {
@@ -359,6 +360,17 @@ export const anchorRuleSet = (network: string) => {
     }),
   };
 
+  const anchorTransferRuleSet: LogFindersRuleSet = {
+    rule: transferRule(contract["anchorANCAddress"]),
+    transform: (fragment) => ({
+      msgType: "anchor/transfer",
+      canonicalMsg: [
+        `Transfer ${fragment.attributes[4].value}${fragment.attributes[0].value} to ${fragment.attributes[2].value}`,
+      ],
+      payload: fragment,
+    }),
+  };
+
   const anchorRuleArray: LogFindersRuleSet[] = [
     anchorProvideLiquidityRuleSet,
     anchorWithdrawLiquidityRuleSet,
@@ -387,6 +399,7 @@ export const anchorRuleSet = (network: string) => {
     anchorGovUntakeRuleSet,
     anchorCreatePollRuleSet,
     anchorCastVoteRuleSet,
+    anchorTransferRuleSet,
   ];
 
   return anchorRuleArray;

@@ -486,3 +486,14 @@ export const castVoteRule = (govAddress: string) => ({
     ["vote_option"],
   ],
 });
+
+export const transferRule = (tokenAddress: string) => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address", tokenAddress],
+    ["action", "transfer"],
+    ["from"],
+    ["to"],
+    ["amount"],
+  ],
+});
