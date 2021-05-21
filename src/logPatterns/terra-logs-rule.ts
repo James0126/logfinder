@@ -34,6 +34,21 @@ export const msgSwapRule = () => ({
   ],
 });
 
+export const msgSwapTerraSwapRule = () => ({
+  type: "from_contract",
+  attributes: [
+    ["contract_address"],
+    ["action", "swap"],
+    ["offer_asset"],
+    ["ask_asset"],
+    ["offer_amount"],
+    ["return_amount"],
+    ["tax_amount"],
+    ["spread_amount"],
+    ["commission_amount"],
+  ],
+});
+
 export const msgExchangeRateVoteRule = () => ({
   type: "vote",
   attributes: [["denom"], ["voter"], ["exchange_rate"], ["feeder"]],
@@ -91,7 +106,7 @@ export const msgBeginRedelegateRule = () => ({
 
 export const msgStoreCodeRule = () => ({
   type: "store_code",
-  attributes: [["sender"], ["code"]],
+  attributes: [["sender"], ["code_id"]],
 });
 
 export const msgMigrateContractRule = () => ({
