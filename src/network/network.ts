@@ -7,6 +7,10 @@ export const networks = [
     URL: "https://tequila-lcd.terra.dev",
     chainID: "tequila-0004",
   },
+  {
+    URL: "https://bombay-lcd.terra.dev",
+    chainID: "bombay-0005",
+  },
 ];
 
 export type Network = {
